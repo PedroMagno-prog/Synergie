@@ -34,5 +34,8 @@ def roll_XdYdl_Z(x, y, z):
         rolls_sort.pop(0)
     return rolls_sort
 
-def sum_result(result_list):
-    return sum(result_list)
+def roll_XdYdh_Z(x, y, z):
+    rolls_sort = sorted(roll_XdY(x, y), reverse=True)
+    for _ in range(z):
+        rolls_sort.pop(0)
+    return rolls_sort
