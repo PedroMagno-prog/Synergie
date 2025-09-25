@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Meus apps:
-    'core',
+    'core.apps.CoreConfig',
+    'contas.apps.ContasConfig',
+    'sistemas.apps.SistemasConfig',
+    'campanhas.apps.CampanhasConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,9 +80,13 @@ WSGI_APPLICATION = 'synergie.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",  # modern alias
+        "NAME": "synergie",
+        "USER": "postgres",
+        "PASSWORD": "coti",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 

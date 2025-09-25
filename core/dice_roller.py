@@ -39,3 +39,43 @@ def roll_XdYdh_Z(x, y, z):
     for _ in range(z):
         rolls_sort.pop(0)
     return rolls_sort
+
+# roll XdY exploding at Z and above
+def roll_XdY_eZ(x, y, z):
+    result = roll_XdY(x, y)
+    soma = sum(result)
+    if result[0] >= z:
+        soma += roll_XdY_eZ(x, y, z)
+    return soma
+
+# roll XdY, missing in an 1 and criting in the max value of the die
+def roll_Nimble(x, y, vicious=False):
+    roll = roll_XdY(x, y)
+    soma = sum(roll)
+    if roll[0] == y:
+        print("Crit")
+        if not vicious:
+            soma += roll_XdY_eZ(1, y, y)
+        else:
+            soma += roll_XdY_eZ(2, y, y)
+        pass
+    elif roll[0] == 1:
+        print("Miss")
+        return 0
+    return soma
+
+def roll_witcher_1d10(base=0):
+    roll = roll_XdY(1, 10)
+    print(base)
+    base += roll[0]
+    print(base)
+    explode = roll_XdY_eZ(1, 10, 10)
+    if roll[0] == 10:
+        base += explode
+    elif roll[0] == 1:
+        base -= explode
+    return base
+    pass
+
+#print(roll_Nimble(4, 4, True))
+#print(roll_witcher_1d10(5))
